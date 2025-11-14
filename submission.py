@@ -44,9 +44,9 @@ model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-print("--- Model Summary ---")
+
 model.summary()
-print("---------------------")
+
 
 history = model.fit(x_train, y_train,
                     batch_size=BATCH_SIZE,
@@ -66,7 +66,7 @@ if not os.path.exists('imgs'):
     os.makedirs('imgs')
 
 plt.savefig('imgs/accuracy_plot.png')
-print("\nAccuracy plot saved to imgs/accuracy_plot.png")
+
 
 test_loss, test_acc = model.evaluate(x_test, y_test)
 print(f"\nTest Accuracy: {test_acc:.4f}")
@@ -74,7 +74,7 @@ print(f"\nTest Accuracy: {test_acc:.4f}")
 y_pred_probs = model.predict(x_test)
 y_pred_labels = np.argmax(y_pred_probs, axis=1)
 
-print("\nSaving misclassified examples...")
+
 for target_class in range(10):
     found = False
     for i in range(len(x_test)):
@@ -97,4 +97,3 @@ for target_class in range(10):
     if not found:
         print(f"No misclassified examples found for class {target_class} ({class_names[target_class]})")
 
-print("Misclassified examples saved to imgs/ directory.")
